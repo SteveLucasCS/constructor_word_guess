@@ -1,8 +1,7 @@
 var Word = require('./word.js');
 var prompt = require('prompt');
 var gameOver = false;
-var round = 0;
-const roundLimit = 10;
+var roundsLeft = 10;
 
 word = new Word('Test');
 console.log(word.toString());
@@ -21,17 +20,30 @@ function promptUser() {
   prompt.get(rules, function(e, input) {
     if (e) throw(e);
 
-    gameOver = word.checkGuess(input.guess);
-    console.log(word.toString());
-    
-    if (gameOver) {
-      console.log('You Win!');
-    } else if (round === roundLimit) {
-      console.log('You Lost!');
+    if (word.checkGuess(input.guess))  {
+      gameOver = true;
+      for (var i = 0; i < word.letters.length; i++) {
+        if (!word.letters[i].guessed) {
+          gameOver = false;
+        }
+      }
+      if (gameOver) {
+        console.log('You Win!');
+      } else {
+        console.log('Good Guess!');
+        promptUser();
+      }
     } else {
-      round++;
-      promptUser();
+      console.log('Incorrect!');
+      roundsLeft--;
+      if (roundsLeft === 0)  {
+        console.log('You Lose!');
+      } else {
+        console.log(`${roundsLeft} guesses left!`);
+        promptUser();
+      }
     }
+    console.log(word.toString());
   });
 }
 

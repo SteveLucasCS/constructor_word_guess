@@ -4,7 +4,8 @@ function Letter(char) {
   this.placeholder = '_';
 }
 Letter.prototype.check = function(guess) {
-  guess === this.char ? this.guessed = true : this.guessed = false;
+  if (guess === this.char)
+    this.guessed = true;
 }
 Letter.prototype.toString = function() {
   return this.guessed ? this.char : this.placeholder;

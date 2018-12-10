@@ -16,13 +16,12 @@ Word.prototype.toString = function() {
 }
 
 Word.prototype.checkGuess = function(guess) {
-  var flagWon = true;
+  var isCorrect = false;
   for(var i = 0; i < this.letters.length; i++) {
-    this.letters[i].check(guess);
-    if (letters[i].guessed === false)
-      flagWon = false;
+    if (this.letters[i].check(guess))
+      isCorrect = true;
   }
-  return flagWon;
+  return isCorrect;
 }
 
 module.exports = Word;
