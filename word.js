@@ -18,8 +18,10 @@ Word.prototype.toString = function() {
 Word.prototype.checkGuess = function(guess) {
   var isCorrect = false;
   for(var i = 0; i < this.letters.length; i++) {
-    if (this.letters[i].check(guess))
+    if (this.letters[i].char === guess) {
+      this.letters[i].guessed = true;
       isCorrect = true;
+    }
   }
   return isCorrect;
 }
