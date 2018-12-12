@@ -3,7 +3,7 @@ var prompt = require('prompt');
 var gameOver = false;
 var roundsLeft = 10;
 
-word = new Word('Test');
+word = new Word('arbitrary');
 console.log(word.toString());
 
 function promptUser() {
